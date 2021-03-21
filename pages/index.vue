@@ -176,6 +176,7 @@
 <script>
 export default {
   head: {
+    title: 'Fiverr Tasks',
     meta: [
       {
         name: 'description',
@@ -192,7 +193,6 @@ export default {
       loading: '',
       results: '',
       ResultTitle: '',
-      ResultDescription: '',
       ResultPayload: '',
       dbname: '',
       notification: '',
@@ -200,22 +200,22 @@ export default {
   },
   mounted: function () {
     this.loadPublicCollections()
-    this.getSelectedDB()
+    this.loadPrivateCollections()
   },
   methods: {
     loadPublicCollections() {
       this.$axios
-        .get('https://api.apiblic.com/public/605798a35133c8e4836c8f53')
+        .get('https://api.apiblic.com/public/6057c5455133c8e4836c8f55')
         .then((response) => {
           this.publicCollections = response.data
-          console.log(response.data)
           this.publicCollectionLoading = false
+          console.log(response.data)
         })
         .catch(() => {
           console.log('error loading public collections')
         })
     },
-    async getSelectedDB() {
+    async loadPrivateCollections() {
       this.loading = true
       try {
         const res = await this.$axios.request({
@@ -226,14 +226,13 @@ export default {
         this.results = res.data[0].payload
         this.data = res.data
         this.ResultTitle = res.data[0].ResultTitle
-        this.ResultDescription = res.data[0].ResultDescription
         this.ResultPayload = res.data[0].payload
-        console.log(res.data)
         this.loading = false
+        console.log(res.data)
       } catch (err) {
+        this.loading = false
         console.log(err)
         console.log('error loading private collections')
-        this.loading = false
       }
     },
   },
