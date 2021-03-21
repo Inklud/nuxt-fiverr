@@ -4,6 +4,13 @@
       title="The Challenge"
       text="Below are 2 tables loaded from diffrent sources. Currently public collections show up under private collections, this should not happen since they are public."
     />
+    <div @click="notification = ''">
+      <Notification
+        v-if="notification"
+        type="sucess"
+        message="This is just a demo - nothing changed"
+      />
+    </div>
     <!-- Start of Public Collection Table -->
     <div
       v-if="!publicCollectionLoading && publicCollections.length >= 1"
@@ -30,11 +37,6 @@
                   class="pl-0 text-gray-600 font-bold pr-6 text-left text-sm tracking-normal leading-4"
                 >
                   Public URL
-                </th>
-                <th
-                  class="pl-0 text-gray-600 font-bold pr-6 text-left text-sm tracking-normal leading-4"
-                >
-                  Database
                 </th>
                 <td class="pr-8">
                   <button
@@ -71,26 +73,13 @@
                     }}</a
                   >
                 </td>
-                <td
-                  class="pl-0 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                >
-                  {{ publicCollections[name].database.name }}
-                </td>
                 <td class="pr-8 text-right">
-                  <a
-                    class="underline"
-                    :href="
-                      'https://api.apiblic.com/public/' +
-                      publicCollections[name].id
-                    "
-                    target="_blank"
+                  <button
+                    @click="notification = 'on'"
+                    class="bg-lipscore-red transition duration-150 ease-in-out border border-transparent focus:outline-none focus:border-gray-800 focus:shadow-outline-gray hover:bg-lipscore-red-hover rounded text-white px-5 py-1 text-sm"
                   >
-                    <button
-                      class="bg-lipscore-red transition duration-150 ease-in-out border border-transparent focus:outline-none focus:border-gray-800 focus:shadow-outline-gray hover:bg-lipscore-red-hover rounded text-white px-5 py-1 text-sm"
-                    >
-                      View
-                    </button>
-                  </a>
+                    Make Private
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -103,7 +92,7 @@
       <Notification
         v-if="notification"
         type="sucess"
-        message="This is just a demo - not added"
+        message="This is just a demo - nothing changed"
       />
     </div>
     <!-- Start of Private Collection Table -->
@@ -159,7 +148,7 @@
                       @click="notification = 'on'"
                       class="bg-lipscore-red transition duration-150 ease-in-out border border-transparent focus:outline-none focus:border-gray-800 focus:shadow-outline-gray hover:bg-lipscore-red-hover rounded text-white px-5 py-1 text-sm"
                     >
-                      Make public
+                      Make Public
                     </button>
                   </td>
                 </tr>
