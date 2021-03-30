@@ -7,7 +7,7 @@
     >
       <div class="flex-wrap justify-between items-center px-6 py-6">
         <p class="inline-block text-lg md:text-xl text-gray-800 font-semibold">
-          Log ({{ publicCollections.length }})
+          Cars ({{ publicCollections.length }})
         </p>
 
         <div class="flex flex-wrap float-right">
