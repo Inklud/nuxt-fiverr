@@ -10,7 +10,7 @@
     >
       Skip to Content
     </div>
-    <div class="w-full min-h-full bg-gray-200">
+    <div class="w-full min-h-full bg-gray-100">
       <Navbar />
       <Nuxt ref="pageContent" tabindex="-1" style="outline: none" />
     </div>

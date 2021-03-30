@@ -13,6 +13,7 @@ module.exports = {
     borderWidth: {
       default: '1px',
       0: '1px',
+      1: '1px',
       2: '2px',
       4: '4px',
       8: '14px',
@@ -23,7 +24,12 @@ module.exports = {
         'lipscore-blue':'#14568f',
         'lipscore-red-hover': '#0e7c3b',
         'lipscore-black-hover':'#1b2428',
-        'lipscore-black':'#222d32'
+        'lipscore-black':'#222d32',
+        'theme-red': '#129F4C',
+        'theme-blue':'#14568f',
+        'theme-red-hover': '#0e7c3b',
+        'theme-black-hover':'#1b2428',
+        'theme-black':'#222d32'
       },
     },
 
