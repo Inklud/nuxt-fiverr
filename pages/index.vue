@@ -2,7 +2,7 @@
   <main class="main">
     <PlaceholderCard
       title="The Challenge"
-      text="To make the search (eg. by Name) and pagination work."
+      text="To make Name and Horsepower sortable, search case insensitive, and the entries count should reflect the number of search results found."
     />
     <CardsLogs />
   </main>
