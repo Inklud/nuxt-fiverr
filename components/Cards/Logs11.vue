@@ -7,7 +7,7 @@
     >
       <div class="flex-wrap justify-between items-center px-6 py-6">
         <p class="inline-block text-lg md:text-xl text-gray-800 font-semibold">
-          Logs ({{ secondaryPublicCollection.length }})
+          Cars ({{ secondaryPublicCollection.length }})
         </p>
 
         <div class="flex flex-wrap float-right">
@@ -24,7 +24,7 @@
           <div class="w-1/3">
             <button
               :disabled="submitted"
-              content="submit"
+              name="submit"
               type="submit"
               class="inline-block h-8 font-medium w-full px-1 leading-none text-white bg-theme-red hover:bg-purple-900"
             >
@@ -42,12 +42,12 @@
               >
                 <th
                   class="pl-6 text-gray-600 font-bold pr-6 text-left text-sm tracking-normal leading-4 cursor-pointer"
-                  @click="onSortClick('content')"
+                  @click="onSortClick('Name')"
                 >
-                  Content
+                  Name
                   <!-- Arrow down svg -->
                   <svg
-                    v-if="sort === 'content'"
+                    v-if="sort === 'Name'"
                     viewport=" 0 0 7 5"
                     width="7"
                     height="5"
@@ -65,7 +65,34 @@
                 <th
                   class="pl-0 text-gray-600 font-bold pr-6 text-left text-sm tracking-normal leading-4"
                 >
-                  Status
+                  Origin
+                </th>
+                <th
+                  class="pl-6 text-gray-600 font-bold pr-6 text-left text-sm tracking-normal leading-4"
+                >
+                  Year
+                </th>
+                <th
+                  class="pl-6 text-gray-600 font-bold pr-6 text-left text-sm tracking-normal leading-4 cursor-pointer"
+                  @click="onSortClick('Horsepower')"
+                >
+                  Horsepower
+                  <!-- Arrow down svg -->
+                  <svg
+                    v-if="sort === 'Horsepower'"
+                    viewport=" 0 0 7 5"
+                    width="7"
+                    height="5"
+                    class="inline"
+                    :class="sortType === 'asc' ? 'transform rotate-180' : ''"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 .469c0 .127.043.237.13.33l3.062 3.28a.407.407 0 0 0 .616 0L6.87.8A.467.467 0 0 0 7 .468a.467.467 0 0 0-.13-.33A.407.407 0 0 0 6.563 0H.438A.407.407 0 0 0 .13.14.467.467 0 0 0 0 .468z"
+                      fill-rule="nonzero"
+                      fill="#212529"
+                    ></path>
+                  </svg>
                 </th>
               </tr>
             </thead>
@@ -78,12 +105,23 @@
                 <td
                   class="pl-6 pr-6 hover:underline text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4"
                 >
-                  {{ item.content }}
+                  {{ item.Name }}
                 </td>
+
                 <td
                   class="pl-0 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4"
                 >
-                  {{ item.status }}
+                  {{ item.Origin }}
+                </td>
+                <td
+                  class="pl-6 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+                >
+                  {{ item.Year }}
+                </td>
+                <td
+                  class="pl-6 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+                >
+                  {{ item.Horsepower }}
                 </td>
               </tr>
             </tbody>
@@ -201,13 +239,13 @@ export default {
   methods: {
     loadPublicCollections() {
       this.$axios
-        .get('https://api.apiblic.com/public/60639348caeefe2026c25e7c')
+        .get('https://api.apiblic.com/public/605795575133c8e4836c8f50')
         .then((response) => {
           this.publicCollections = response.data
           this.secondaryPublicCollection = this.publicCollections
           this.publicCollectionLoading = false
           console.log(response.data)
-          this.onSortClick('content')
+          this.onSortClick('Name')
         })
         .catch(() => {
           console.log('error loading public collections')
@@ -311,7 +349,7 @@ export default {
         this.secondaryPublicCollection = this.publicCollections.filter(
           (item) => {
             const regEx = new RegExp(val, 'gi')
-            return item.content.match(regEx)
+            return item.Name.match(regEx) || item.Origin.match(regEx)
           }
         )
       }
